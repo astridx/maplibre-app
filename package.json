@@ -13,9 +13,9 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "eact-app-rewired start",
+    "build": "eact-app-rewired build",
+    "test": "eact-app-rewired test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
