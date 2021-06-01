@@ -1,2 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom'; ReactDOM.render(<></>, document.getElementById('root'));
+import React from "react";
+import ReactDOM from "react-dom";
+import { Map } from "./Map";
+
+ReactDOM.render(<Map />, document.getElementById("root"));
