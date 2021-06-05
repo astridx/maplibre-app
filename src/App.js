@@ -5,7 +5,7 @@ function getTitle(title) {
   return title;
 }
 
-const list = [
+const pois = [
   {
     display_name:'Brot und mehr',
     icon:'https://nominatim.openstreetmap.org/ui/mapicons//shopping_bakery.p.20.png',
