@@ -1,7 +1,9 @@
 import React from "react";
 import ReactMapGL from "react-map-gl";
 
-const title = "React Maplibre Map";
+function getTitle(title) {
+  return title;
+}
 
 function App() {
   const mapViewport = {
@@ -18,7 +20,7 @@ function App() {
 
   return (
     <div>
-      <h1>{title}</h1>
+      <h1>{getTitle("React Maplibre Map")}</h1>
       <label htmlFor="search">Suche: </label>
       <input id="search" type="text" />
       <ReactMapGL {...mapViewport} mapStyle={mapstyle}></ReactMapGL>
