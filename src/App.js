@@ -5,6 +5,37 @@ function getTitle(title) {
   return title;
 }
 
+const list = [
+  {
+    display_name:'Brot und mehr',
+    icon:'https://nominatim.openstreetmap.org/ui/mapicons//shopping_bakery.p.20.png',
+    lat:'50.4', 
+    lon:'7.1',
+    place_id:'1'
+  },
+  {
+    display_name:'Baecker Mueller',
+    icon:'https://nominatim.openstreetmap.org/ui/mapicons//shopping_bakery.p.20.png',
+    lat:'51.4', 
+    lon:'6.1',
+    place_id:'2'
+  },
+  {
+    display_name:'Brot am Morgen',
+    icon:'https://nominatim.openstreetmap.org/ui/mapicons//shopping_bakery.p.20.png',
+    lat:'50.4', 
+    lon:'7.1',
+    place_id:'3'
+  },
+  {
+    display_name:'Baecker Pleinen',
+    icon:'https://nominatim.openstreetmap.org/ui/mapicons//shopping_bakery.p.20.png',
+    lat:'51.4', 
+    lon:'6.1',
+    place_id:'4'
+  },
+];
+
 function App() {
   const mapViewport = {
     height: "100vh",
