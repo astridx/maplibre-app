@@ -19,6 +19,8 @@ function App() {
   return (
     <div>
       <h1>{title}</h1>
+      <label htmlFor="search">Suche: </label>
+      <input id="search" type="text" />
       <ReactMapGL {...mapViewport} mapStyle={mapstyle}></ReactMapGL>
     </div>
   );
