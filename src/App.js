@@ -7,32 +7,32 @@ function getTitle(title) {
 
 const pois = [
   {
-    display_name:'Brot und mehr',
-    icon:'https://nominatim.openstreetmap.org/ui/mapicons//shopping_bakery.p.20.png',
-    lat:'50.4', 
-    lon:'7.1',
-    place_id:'1'
+    display_name: "Brot und mehr",
+    icon: "https://nominatim.openstreetmap.org/ui/mapicons//shopping_bakery.p.20.png",
+    lat: "50.4",
+    lon: "7.1",
+    place_id: "1",
   },
   {
-    display_name:'Baecker Mueller',
-    icon:'https://nominatim.openstreetmap.org/ui/mapicons//shopping_bakery.p.20.png',
-    lat:'51.4', 
-    lon:'6.1',
-    place_id:'2'
+    display_name: "Baecker Mueller",
+    icon: "https://nominatim.openstreetmap.org/ui/mapicons//shopping_bakery.p.20.png",
+    lat: "51.4",
+    lon: "6.1",
+    place_id: "2",
   },
   {
-    display_name:'Brot am Morgen',
-    icon:'https://nominatim.openstreetmap.org/ui/mapicons//shopping_bakery.p.20.png',
-    lat:'50.4', 
-    lon:'7.1',
-    place_id:'3'
+    display_name: "Brot am Morgen",
+    icon: "https://nominatim.openstreetmap.org/ui/mapicons//shopping_bakery.p.20.png",
+    lat: "50.4",
+    lon: "7.1",
+    place_id: "3",
   },
   {
-    display_name:'Baecker Pleinen',
-    icon:'https://nominatim.openstreetmap.org/ui/mapicons//shopping_bakery.p.20.png',
-    lat:'51.4', 
-    lon:'6.1',
-    place_id:'4'
+    display_name: "Baecker Pleinen",
+    icon: "https://nominatim.openstreetmap.org/ui/mapicons//shopping_bakery.p.20.png",
+    lat: "51.4",
+    lon: "6.1",
+    place_id: "4",
   },
 ];
 
@@ -53,6 +53,22 @@ function App() {
     <div>
       <h1>{getTitle("React Maplibre Map")}</h1>
       <label htmlFor="search">Suche: </label>
+      <table>
+        <tbody>
+          {pois.map(function (item) {
+            return (
+              <tr key={item.place_id}>
+                <td>{item.display_name}</td>
+                <td>{item.lat}</td>
+                <td>{item.lon}</td>
+                <td>
+                  <img alt="" src={item.icon} />
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
       <input id="search" type="text" />
       <ReactMapGL {...mapViewport} mapStyle={mapstyle}></ReactMapGL>
     </div>
