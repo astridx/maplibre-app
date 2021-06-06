@@ -53,8 +53,8 @@ function App() {
     <div>
       <h1>{getTitle("React Maplibre Map")}</h1>
       <label htmlFor="search">Suche: </label>
-      <List />
       <input id="search" type="text" />
+      <List />
       <ReactMapGL {...mapViewport} mapStyle={mapstyle}></ReactMapGL>
     </div>
   );
