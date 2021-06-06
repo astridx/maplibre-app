@@ -53,25 +53,32 @@ function App() {
     <div>
       <h1>{getTitle("React Maplibre Map")}</h1>
       <label htmlFor="search">Suche: </label>
-      <table>
-        <tbody>
-          {pois.map(function (item) {
-            return (
-              <tr key={item.place_id}>
-                <td>{item.display_name}</td>
-                <td>{item.lat}</td>
-                <td>{item.lon}</td>
-                <td>
-                  <img alt="" src={item.icon} />
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <List />
       <input id="search" type="text" />
       <ReactMapGL {...mapViewport} mapStyle={mapstyle}></ReactMapGL>
     </div>
+  );
+}
+
+function List() {
+  return (
+    <table>
+      <tbody>
+        {pois.map(function (item) {
+          return (
+            <tr key={item.place_id}>
+              <td>{item.display_name}</td>
+              <td>{item.lat}</td>
+              <td>{item.lon}</td>
+              <td>{item.importance}</td>
+              <td>
+                <img alt="" src={item.icon} />
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
   );
 }
 
