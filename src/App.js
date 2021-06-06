@@ -40,9 +40,8 @@ function App() {
   return (
     <div>
       <h1>{getTitle("React Maplibre Map")}</h1>
-      <label htmlFor="search">Suche: </label>
+      <Search />
       <List />
-      <input id="search" type="text" />
       <Map />
     </div>
   );
@@ -76,16 +75,23 @@ export const Map = () => {
     width: "100wh",
     longitude: 7.571606,
     latitude: 50.226913,
-    zoom: 4
+    zoom: 4,
   };
 
   const mapstyle =
     "https://api.maptiler.com/maps/streets/style.json?key=" +
     process.env.REACT_APP_MAPTILER_TOKEN;
 
-  return (
-    <ReactMapGL {...mapViewport} mapStyle={mapstyle}></ReactMapGL>
-  );
+  return <ReactMapGL {...mapViewport} mapStyle={mapstyle}></ReactMapGL>;
 };
+
+function Search() {
+  return (
+    <div>
+      <label htmlFor="search">Suche: </label>
+      <input id="search" type="text" />
+    </div>
+  );
+}
 
 export default App;
