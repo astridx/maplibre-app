@@ -77,12 +77,12 @@ function List() {
   );
 }
 
-export const Map = () => {
+function Map() {
   const mapstyle =
     "https://api.maptiler.com/maps/streets/style.json?key=" +
     process.env.REACT_APP_MAPTILER_TOKEN;
 
   return <ReactMapGL {...mapViewport} mapStyle={mapstyle}></ReactMapGL>;
-};
+}
 
 export default App;
