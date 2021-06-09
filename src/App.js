@@ -82,7 +82,7 @@ const List = () => (
   </table>
 );
 
-function Map() {
+const Map = () => {
   const mapstyle =
     "https://api.maptiler.com/maps/streets/style.json?key=" +
     process.env.REACT_APP_MAPTILER_TOKEN;
@@ -93,7 +93,7 @@ function Map() {
       <ReactMapGL {...mapViewportBig} mapStyle={mapstyle}></ReactMapGL>
     </>
   );
-};
+}
 
 function Search() {
   return (
