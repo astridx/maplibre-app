@@ -59,6 +59,7 @@ function App() {
       <Search />
       <List />
       <Map />
+      <List />
     </div>
   );
 }
