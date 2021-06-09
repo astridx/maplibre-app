@@ -82,7 +82,7 @@ const List = () => (
   </table>
 );
 
-export const Map = () => {
+function Map() {
   const mapstyle =
     "https://api.maptiler.com/maps/streets/style.json?key=" +
     process.env.REACT_APP_MAPTILER_TOKEN;
