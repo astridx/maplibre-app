@@ -93,7 +93,7 @@ const Map = () => {
       <ReactMapGL {...mapViewportBig} mapStyle={mapstyle}></ReactMapGL>
     </>
   );
-}
+};
 
 function Search() {
   return (
