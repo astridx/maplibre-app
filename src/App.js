@@ -93,15 +93,13 @@ const Map = () => {
       <ReactMapGL {...mapViewportBig} mapStyle={mapstyle}></ReactMapGL>
     </>
   );
-}
+};
 
-function Search() {
-  return (
-    <div>
-      <label htmlFor="search">Suche: </label>
-      <input id="search" type="text" />
-    </div>
-  );
-}
+const Search = () => (
+  <div>
+    <label htmlFor="search">Suche: </label>
+    <input id="search" type="text" />
+  </div>
+);
 
 export default App;
