@@ -57,33 +57,30 @@ function App() {
     <div>
       <h1>{getTitle("React Maplibre Map")}</h1>
       <Search />
-      <List />
       <Map />
       <List />
     </div>
   );
 }
 
-function List() {
-  return (
-    <table>
-      <tbody>
-        {pois.map(function (item) {
-          return (
-            <tr key={item.place_id}>
-              <td>{item.display_name}</td>
-              <td>{item.lat}</td>
-              <td>{item.lon}</td>
-              <td>
-                <img alt="" src={item.icon} />
-              </td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
-  );
-}
+const List = () => (
+  <table>
+    <tbody>
+      {pois.map(function (item) {
+        return (
+          <tr key={item.place_id}>
+            <td>{item.display_name}</td>
+            <td>{item.lat}</td>
+            <td>{item.lon}</td>
+            <td>
+              <img alt="" src={item.icon} />
+            </td>
+          </tr>
+        );
+      })}
+    </tbody>
+  </table>
+);
 
 export const Map = () => {
   const mapstyle =
