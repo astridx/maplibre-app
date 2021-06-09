@@ -36,9 +36,17 @@ const pois = [
   },
 ];
 
-const mapViewport = {
-  height: "100vh",
-  width: "100wh",
+const mapViewportBig = {
+  height: "50vh",
+  width: "50vw",
+  longitude: 7.571606,
+  latitude: 50.226913,
+  zoom: 4,
+};
+
+const mapViewportSmall = {
+  height: "15vh",
+  width: "15vw",
   longitude: 7.571606,
   latitude: 50.226913,
   zoom: 4,
@@ -81,7 +89,12 @@ export const Map = () => {
     "https://api.maptiler.com/maps/streets/style.json?key=" +
     process.env.REACT_APP_MAPTILER_TOKEN;
 
-  return <ReactMapGL {...mapViewport} mapStyle={mapstyle}></ReactMapGL>;
+  return (
+    <>
+      <ReactMapGL {...mapViewportSmall} mapStyle={mapstyle}></ReactMapGL>
+      <ReactMapGL {...mapViewportBig} mapStyle={mapstyle}></ReactMapGL>
+    </>
+  );
 };
 
 function Search() {
