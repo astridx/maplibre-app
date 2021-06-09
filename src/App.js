@@ -58,7 +58,6 @@ function List() {
               <td>{item.display_name}</td>
               <td>{item.lat}</td>
               <td>{item.lon}</td>
-              <td>{item.importance}</td>
               <td>
                 <img alt="" src={item.icon} />
               </td>
