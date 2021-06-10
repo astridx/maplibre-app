@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ReactMapGL, { NavigationControl } from "react-map-gl";
+import ReactMapGL, { Marker, NavigationControl } from "react-map-gl";
 
 function getTitle(title) {
   return title;
@@ -15,7 +15,7 @@ function App() {
       display_name: "Brot und mehr",
       icon: "https://nominatim.openstreetmap.org/ui/mapicons//shopping_bakery.p.20.png",
       lat: "50.4",
-      lon: "7.1",
+      lon: "6.1",
       place_id: "1",
     },
     {
@@ -36,22 +36,22 @@ function App() {
       display_name: "Baecker Pleinen",
       icon: "https://nominatim.openstreetmap.org/ui/mapicons//shopping_bakery.p.20.png",
       lat: "51.4",
-      lon: "6.1",
+      lon: "7.1",
       place_id: "4",
     },
   ];
 
   const [searchTerm, setSearchTerm] = useState("");
 
-  const searchedpois = pois.filter(function (poi) {
-    return poi.display_name.toLowerCase().includes(searchTerm.toLowerCase());
-  });
+  const searchedpois = pois.filter((poi) =>
+    poi.display_name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div>
       <h1>{getTitle("React Maplibre Map")}</h1>
       <Search onSearch={handleSearch} searchTerm={searchTerm} />
-      <Map />
+      <Map list={searchedpois} />
       <List list={searchedpois} />
     </div>
   );
@@ -74,7 +74,7 @@ const List = (props) => (
   </table>
 );
 
-const Map = () => {
+const Map = (props) => {
   const mapstyle =
     "https://api.maptiler.com/maps/streets/style.json?key=" +
     process.env.REACT_APP_MAPTILER_TOKEN;
@@ -110,6 +110,16 @@ const Map = () => {
         onViewportChange={setMapViewportBig}
       >
         <NavigationControl />
+        {props.list.map((marker) => (
+          <Marker
+            offsetTop={-48}
+            offsetLeft={-24}
+            latitude={parseInt(marker.lat)}
+            longitude={parseInt(marker.lon)}
+          >
+            <img src={marker.icon} />
+          </Marker>
+        ))}
       </ReactMapGL>
     </>
   );
