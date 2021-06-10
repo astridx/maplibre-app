@@ -52,16 +52,14 @@ const mapViewportSmall = {
   zoom: 4,
 };
 
-function App() {
-  return (
-    <div>
-      <h1>{getTitle("React Maplibre Map")}</h1>
-      <Search />
-      <Map />
-      <List />
-    </div>
-  );
-}
+const App = () => (
+  <div>
+    <h1>{getTitle("React Maplibre Map")}</h1>
+    <Search />
+    <Map />
+    <List />
+  </div>
+);
 
 const List = () => (
   <table>
