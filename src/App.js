@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactMapGL from "react-map-gl";
 
 function getTitle(title) {
@@ -69,7 +69,7 @@ const Map = () => {
     "https://api.maptiler.com/maps/streets/style.json?key=" +
     process.env.REACT_APP_MAPTILER_TOKEN;
 
-  const [mapViewportBig, setMapViewportBig] = React.useState({
+  const [mapViewportBig, setMapViewportBig] = useState({
     height: "50vh",
     width: "50vw",
     longitude: 7.571606,
@@ -77,7 +77,7 @@ const Map = () => {
     zoom: 4,
   });
 
-  const [mapViewportSmall, setMapViewportSmall] = React.useState({
+  const [mapViewportSmall, setMapViewportSmall] = useState({
     height: "15vh",
     width: "15vw",
     longitude: 7.571606,
@@ -106,7 +106,7 @@ function Search() {
     setSearchTerm(event.target.value);
   };
 
-  const [searchTerm, setSearchTerm] = React.useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   return (
     <div>
