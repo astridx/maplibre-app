@@ -6,10 +6,8 @@ function getTitle(title) {
 }
 
 function App() {
-  // 1
   const handleSearch = (event) => {
-    // 4
-    console.log(event.target.value);
+    setSearchTerm(event.target.value);
   };
 
   const pois = [
@@ -43,13 +41,18 @@ function App() {
     },
   ];
 
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const searchedpois = pois.filter(function (poi) {
+    return poi.display_name.includes(searchTerm);
+  });
+
   return (
     <div>
       <h1>{getTitle("React Maplibre Map")}</h1>
-      {/* 2 */}
-      <Search onSearch={handleSearch} />
+      <Search onSearch={handleSearch} searchTerm={searchTerm} />
       <Map />
-      <List list={pois} />
+      <List list={searchedpois} />
     </div>
   );
 }
@@ -113,20 +116,12 @@ const Map = () => {
 };
 
 const Search = (props) => {
-  const handleChange = (event) => {
-    setSearchTerm(event.target.value);
-    // 3
-    props.onSearch(event);
-  };
-
-  const [searchTerm, setSearchTerm] = useState("");
-
   return (
     <div>
       <label htmlFor="search">Suche: </label>
-      <input id="search" type="text" onChange={handleChange} />
+      <input id="search" type="text" onChange={props.onSearch} />
       <p>
-        Suchwort: <strong>{searchTerm}</strong>
+        Suchwort: <strong>{props.searchTerm}</strong>
       </p>
     </div>
   );
