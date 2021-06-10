@@ -6,6 +6,12 @@ function getTitle(title) {
 }
 
 function App() {
+  // 1
+  const handleSearch = (event) => {
+    // 4
+    console.log(event.target.value);
+  };
+
   const pois = [
     {
       display_name: "Brot und mehr",
@@ -40,7 +46,8 @@ function App() {
   return (
     <div>
       <h1>{getTitle("React Maplibre Map")}</h1>
-      <Search />
+      {/* 2 */}
+      <Search onSearch={handleSearch} />
       <Map />
       <List list={pois} />
     </div>
@@ -105,9 +112,11 @@ const Map = () => {
   );
 };
 
-function Search() {
+const Search = (props) => {
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
+    // 3
+    props.onSearch(event);
   };
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -121,6 +130,6 @@ function Search() {
       </p>
     </div>
   );
-}
+};
 
 export default App;
