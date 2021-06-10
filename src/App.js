@@ -66,18 +66,16 @@ function App() {
 const List = () => (
   <table>
     <tbody>
-      {pois.map(function (item) {
-        return (
-          <tr key={item.place_id}>
-            <td>{item.display_name}</td>
-            <td>{item.lat}</td>
-            <td>{item.lon}</td>
-            <td>
-              <img alt="" src={item.icon} />
-            </td>
-          </tr>
-        );
-      })}
+      {pois.map((item) => (
+        <tr key={item.place_id}>
+          <td>{item.display_name}</td>
+          <td>{item.lat}</td>
+          <td>{item.lon}</td>
+          <td>
+            <img alt="" src={item.icon} />
+          </td>
+        </tr>
+      ))}
     </tbody>
   </table>
 );
