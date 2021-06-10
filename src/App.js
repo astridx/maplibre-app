@@ -95,14 +95,18 @@ const Map = () => {
 
 function Search() {
   const handleChange = (event) => {
-    console.log(event);
-    console.log(event.target.value);
+    setSearchTerm(event.target.value);
   };
+
+  const [searchTerm, setSearchTerm] = React.useState("");
 
   return (
     <div>
       <label htmlFor="search">Suche: </label>
       <input id="search" type="text" onChange={handleChange} />
+      <p>
+        Suchwort: <strong>{searchTerm}</strong>
+      </p>
     </div>
   );
 }
