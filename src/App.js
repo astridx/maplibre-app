@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ReactMapGL from "react-map-gl";
+import ReactMapGL, { NavigationControl } from "react-map-gl";
 
 function getTitle(title) {
   return title;
@@ -78,8 +78,8 @@ const Map = () => {
   });
 
   const [mapViewportSmall, setMapViewportSmall] = useState({
-    height: "15vh",
-    width: "15vw",
+    height: "25vh",
+    width: "25vw",
     longitude: 7.571606,
     latitude: 50.226913,
     zoom: 10,
@@ -91,12 +91,16 @@ const Map = () => {
         {...mapViewportSmall}
         mapStyle={mapstyle}
         onViewportChange={setMapViewportSmall}
-      ></ReactMapGL>
+      >
+        <NavigationControl />
+      </ReactMapGL>
       <ReactMapGL
         {...mapViewportBig}
         mapStyle={mapstyle}
         onViewportChange={setMapViewportBig}
-      ></ReactMapGL>
+      >
+        <NavigationControl />
+      </ReactMapGL>
     </>
   );
 };
