@@ -5,22 +5,6 @@ function getTitle(title) {
   return title;
 }
 
-const mapViewportBig = {
-  height: "50vh",
-  width: "50vw",
-  longitude: 7.571606,
-  latitude: 50.226913,
-  zoom: 4,
-};
-
-const mapViewportSmall = {
-  height: "15vh",
-  width: "15vw",
-  longitude: 7.571606,
-  latitude: 50.226913,
-  zoom: 4,
-};
-
 function App() {
   const pois = [
     {
@@ -85,10 +69,34 @@ const Map = () => {
     "https://api.maptiler.com/maps/streets/style.json?key=" +
     process.env.REACT_APP_MAPTILER_TOKEN;
 
+  const [mapViewportBig, setMapViewportBig] = React.useState({
+    height: "50vh",
+    width: "50vw",
+    longitude: 7.571606,
+    latitude: 50.226913,
+    zoom: 4,
+  });
+
+  const [mapViewportSmall, setMapViewportSmall] = React.useState({
+    height: "15vh",
+    width: "15vw",
+    longitude: 7.571606,
+    latitude: 50.226913,
+    zoom: 10,
+  });
+
   return (
     <>
-      <ReactMapGL {...mapViewportSmall} mapStyle={mapstyle}></ReactMapGL>
-      <ReactMapGL {...mapViewportBig} mapStyle={mapstyle}></ReactMapGL>
+      <ReactMapGL
+        {...mapViewportSmall}
+        mapStyle={mapstyle}
+        onViewportChange={setMapViewportSmall}
+      ></ReactMapGL>
+      <ReactMapGL
+        {...mapViewportBig}
+        mapStyle={mapstyle}
+        onViewportChange={setMapViewportBig}
+      ></ReactMapGL>
     </>
   );
 };
