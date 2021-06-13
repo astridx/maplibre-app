@@ -139,14 +139,12 @@ const Map = (props) => {
   );
 };
 
-const Search = ({ searchTerm, onSearch }) => (
-  <div>
-    <label htmlFor="search">Suche: </label>
-    <input id="search" type="text" value={searchTerm} onChange={onSearch} />
-    <p>
+const Search = ({ searchTerm, onSearch }) => [
+    <label key="1" htmlFor="search">Suche: {' '}</label>,
+    <input key="2" id="search" type="text" value={searchTerm} onChange={onSearch} />,
+    <p key="3">
       Suchwort: <strong>{searchTerm}</strong>
     </p>
-  </div>
-);
+];
 
 export default App;
