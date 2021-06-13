@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactMapGL, { Marker, NavigationControl } from "react-map-gl";
 
 function getTitle(title) {
@@ -8,7 +8,6 @@ function getTitle(title) {
 function App() {
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
-    localStorage.setItem("search", event.target.value);
   };
 
   const pois = [
@@ -45,6 +44,10 @@ function App() {
   const [searchTerm, setSearchTerm] = useState(
     localStorage.getItem("search") || "Brot"
   );
+
+  useEffect(() => {
+    localStorage.setItem("search", searchTerm);
+  }, [searchTerm]);
 
   const searchedpois = pois.filter((poi) =>
     poi.display_name.toLowerCase().includes(searchTerm.toLowerCase())
