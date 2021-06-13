@@ -5,12 +5,12 @@ function getTitle(title) {
   return title;
 }
 
-const useSemiPersistentState = () => {
-  const [value, setValue] = useState(localStorage.getItem("value") || "Brot");
+const useSemiPersistentState = (key) => {
+  const [value, setValue] = useState(localStorage.getItem(key) || "Brot");
 
   useEffect(() => {
-    localStorage.setItem("value", value);
-  }, [value]);
+    localStorage.setItem(key, value);
+  }, [value, key]);
 
   return [value, setValue];
 };
