@@ -129,7 +129,12 @@ const Search = (props) => {
   return (
     <div>
       <label htmlFor="search">Suche: </label>
-      <input id="search" type="text" onChange={props.onSearch} />
+      <input
+        id="search"
+        type="text"
+        value={props.searchTerm}
+        onChange={props.onSearch}
+      />
       <p>
         Suchwort: <strong>{props.searchTerm}</strong>
       </p>
