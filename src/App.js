@@ -5,7 +5,21 @@ function getTitle(title) {
   return title;
 }
 
+const useSemiPersistentState = () => {
+  const [searchTerm, setSearchTerm] = useState(
+    localStorage.getItem("search") || "Brot"
+  );
+
+  useEffect(() => {
+    localStorage.setItem("search", searchTerm);
+  }, [searchTerm]);
+
+  return [searchTerm, setSearchTerm];
+};
+
 function App() {
+  const [searchTerm, setSearchTerm] = useSemiPersistentState();
+
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -40,14 +54,6 @@ function App() {
       place_id: "4",
     },
   ];
-
-  const [searchTerm, setSearchTerm] = useState(
-    localStorage.getItem("search") || "Brot"
-  );
-
-  useEffect(() => {
-    localStorage.setItem("search", searchTerm);
-  }, [searchTerm]);
 
   const searchedpois = pois.filter((poi) =>
     poi.display_name.toLowerCase().includes(searchTerm.toLowerCase())
