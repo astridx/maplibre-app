@@ -159,10 +159,10 @@ const Map = (props) => {
   );
 };
 
-const LabelInput = ({ id, label, value, onInputChange }) => (
+const LabelInput = ({ id, label, value, onInputChange, type = "text" }) => (
   <>
     <label htmlFor={id}>{label}</label>
-    <input id={id} type="text" value={value} onChange={onInputChange} />
+    <input id={id} type={type} value={value} onChange={onInputChange} />
     <br />
   </>
 );
