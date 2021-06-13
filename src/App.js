@@ -61,17 +61,21 @@ const List = (props) => (
   <table>
     <tbody>
       {props.list.map((item) => (
-        <tr key={item.place_id}>
-          <td>{item.display_name}</td>
-          <td>{item.lat}</td>
-          <td>{item.lon}</td>
-          <td>
-            <img alt="" src={item.icon} />
-          </td>
-        </tr>
+        <POI key={item.place_id} poi={item} />
       ))}
     </tbody>
   </table>
+);
+
+const POI = ({ poi }) => (
+  <tr key={poi.place_id}>
+    <td>{poi.display_name}</td>
+    <td>{poi.lat}</td>
+    <td>{poi.lon}</td>
+    <td>
+      <img alt="" src={poi.icon} />
+    </td>
+  </tr>
 );
 
 const Map = (props) => {
