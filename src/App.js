@@ -126,17 +126,14 @@ const Map = (props) => {
 };
 
 const Search = (props) => {
+  const { searchTerm, onSearch } = props;
+
   return (
     <div>
       <label htmlFor="search">Suche: </label>
-      <input
-        id="search"
-        type="text"
-        value={props.searchTerm}
-        onChange={props.onSearch}
-      />
+      <input id="search" type="text" value={searchTerm} onChange={onSearch} />
       <p>
-        Suchwort: <strong>{props.searchTerm}</strong>
+        Suchwort: <strong>{searchTerm}</strong>
       </p>
     </div>
   );
