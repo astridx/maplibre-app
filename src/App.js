@@ -16,7 +16,7 @@ const useSemiPersistentState = (key, initialState) => {
 };
 
 function App() {
-  const [searchTerm, setSearchTerm] = useSemiPersistentState();
+  const [searchTerm, setSearchTerm] = useSemiPersistentState("search");
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
