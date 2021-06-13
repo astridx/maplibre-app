@@ -6,15 +6,13 @@ function getTitle(title) {
 }
 
 const useSemiPersistentState = () => {
-  const [searchTerm, setSearchTerm] = useState(
-    localStorage.getItem("search") || "Brot"
-  );
+  const [value, setValue] = useState(localStorage.getItem("value") || "Brot");
 
   useEffect(() => {
-    localStorage.setItem("search", searchTerm);
-  }, [searchTerm]);
+    localStorage.setItem("value", value);
+  }, [value]);
 
-  return [searchTerm, setSearchTerm];
+  return [value, setValue];
 };
 
 function App() {
