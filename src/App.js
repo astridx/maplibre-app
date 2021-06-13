@@ -41,7 +41,7 @@ function App() {
     },
   ];
 
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState("Brot");
 
   const searchedpois = pois.filter((poi) =>
     poi.display_name.toLowerCase().includes(searchTerm.toLowerCase())
