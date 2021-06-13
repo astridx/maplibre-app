@@ -125,9 +125,7 @@ const Map = (props) => {
   );
 };
 
-const Search = (props) => {
-  const { searchTerm, onSearch } = props;
-
+const Search = ({ searchTerm, onSearch }) => {
   return (
     <div>
       <label htmlFor="search">Suche: </label>
