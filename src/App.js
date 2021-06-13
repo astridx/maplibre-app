@@ -18,8 +18,17 @@ const useSemiPersistentState = (key, initialState) => {
 function App() {
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "Brot");
 
+  const [centerTerm, setCenterTerm] = useSemiPersistentState(
+    "center",
+    "50.2, 7.5"
+  );
+
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
+  };
+
+  const handleCenter = (event) => {
+    setCenterTerm(event.target.value);
   };
 
   const pois = [
@@ -60,8 +69,18 @@ function App() {
   return (
     <div>
       <h1>{getTitle("React Maplibre Map")}</h1>
-      <LabelInput id="suche" label="Suche" onSearch={handleSearch} searchTerm={searchTerm} />
-      <LabelInput id="center" label="Kartenmittelpunkt" onSearch={handleSearch} searchTerm={searchTerm} />
+      <LabelInput
+        id="suche"
+        label="Suche"
+        onInputChange={handleSearch}
+        value={searchTerm}
+      />
+      <LabelInput
+        id="center"
+        label="Kartenmittelpunkt"
+        onInputChange={handleCenter}
+        value={centerTerm}
+      />
       <Map list={searchedpois} />
       <List list={searchedpois} />
     </div>
@@ -140,13 +159,11 @@ const Map = (props) => {
   );
 };
 
-const LabelInput = ({ id, label, searchTerm, onSearch }) => (
+const LabelInput = ({ id, label, value, onInputChange }) => (
   <>
-    <label htmlFor="search">Suche: </label>
-    <input id="search" type="text" value={searchTerm} onChange={onSearch} />
-    <p>
-      Suchwort: <strong>{searchTerm}</strong>
-    </p>
+    <label htmlFor={id}>{label}</label>
+    <input id={id} type="text" value={value} onChange={onInputChange} />
+    <br />
   </>
 );
 
