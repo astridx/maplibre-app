@@ -8,6 +8,7 @@ function getTitle(title) {
 function App() {
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
+    localStorage.setItem("search", event.target.value);
   };
 
   const pois = [
@@ -41,7 +42,9 @@ function App() {
     },
   ];
 
-  const [searchTerm, setSearchTerm] = useState("Brot");
+  const [searchTerm, setSearchTerm] = useState(
+    localStorage.getItem("search") || "Brot"
+  );
 
   const searchedpois = pois.filter((poi) =>
     poi.display_name.toLowerCase().includes(searchTerm.toLowerCase())
