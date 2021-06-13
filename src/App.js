@@ -43,9 +43,9 @@ function App() {
 
   const [searchTerm, setSearchTerm] = useState("");
 
-  const searchedpois = pois.filter(function (poi) {
-    return poi.display_name.toLowerCase().includes(searchTerm.toLowerCase());
-  });
+  const searchedpois = pois.filter((poi) =>
+    poi.display_name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div>
