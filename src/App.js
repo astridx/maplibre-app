@@ -60,8 +60,8 @@ function App() {
   return (
     <div>
       <h1>{getTitle("React Maplibre Map")}</h1>
-      <Search onSearch={handleSearch} searchTerm={searchTerm} />
-      <Search onSearch={handleSearch} searchTerm={searchTerm} />
+      <LabelInput id="suche" label="Suche" onSearch={handleSearch} searchTerm={searchTerm} />
+      <LabelInput id="center" label="Kartenmittelpunkt" onSearch={handleSearch} searchTerm={searchTerm} />
       <Map list={searchedpois} />
       <List list={searchedpois} />
     </div>
@@ -140,7 +140,7 @@ const Map = (props) => {
   );
 };
 
-const Search = ({ searchTerm, onSearch }) => (
+const LabelInput = ({ id, label, searchTerm, onSearch }) => (
   <>
     <label htmlFor="search">Suche: </label>
     <input id="search" type="text" value={searchTerm} onChange={onSearch} />
