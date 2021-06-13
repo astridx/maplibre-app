@@ -5,8 +5,8 @@ function getTitle(title) {
   return title;
 }
 
-const useSemiPersistentState = (key) => {
-  const [value, setValue] = useState(localStorage.getItem(key) || "Brot");
+const useSemiPersistentState = (key, initialState) => {
+  const [value, setValue] = useState(localStorage.getItem(key) || initialState);
 
   useEffect(() => {
     localStorage.setItem(key, value);
