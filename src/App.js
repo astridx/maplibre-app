@@ -61,6 +61,7 @@ function App() {
     <div>
       <h1>{getTitle("React Maplibre Map")}</h1>
       <Search onSearch={handleSearch} searchTerm={searchTerm} />
+      <Search onSearch={handleSearch} searchTerm={searchTerm} />
       <Map list={searchedpois} />
       <List list={searchedpois} />
     </div>
