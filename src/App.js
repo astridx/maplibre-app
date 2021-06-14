@@ -81,7 +81,7 @@ function App() {
         onInputChange={handleCenter}
         value={centerTerm}
       />
-      <Map list={searchedpois} />
+      <Map list={searchedpois} center={centerTerm} />
       <List list={searchedpois} />
     </div>
   );
@@ -113,19 +113,21 @@ const Map = (props) => {
     "https://api.maptiler.com/maps/streets/style.json?key=" +
     process.env.REACT_APP_MAPTILER_TOKEN;
 
+  const c = props.center.split(",");
+
   const [mapViewportBig, setMapViewportBig] = useState({
     height: "50vh",
     width: "50vw",
-    longitude: 7.571606,
-    latitude: 50.226913,
+    longitude: parseInt(c[1]),
+    latitude: parseInt(c[0]),
     zoom: 4,
   });
 
   const [mapViewportSmall, setMapViewportSmall] = useState({
     height: "25vh",
     width: "25vw",
-    longitude: 7.571606,
-    latitude: 50.226913,
+    longitude: parseInt(c[1]),
+    latitude: parseInt(c[0]),
     zoom: 10,
   });
 
