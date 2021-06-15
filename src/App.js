@@ -167,18 +167,31 @@ const LabelInput = ({
   type = "text",
   isAutoFocused,
   children,
-}) => (
-  <>
-    <label htmlFor={id}>{children}</label>
-    <input
-      autoFocus={isAutoFocused}
-      id={id}
-      type={type}
-      value={value}
-      onChange={onInputChange}
-    />
-    <br />
-  </>
-);
+}) => {
+  // 1
+  const inputRef = React.useRef();
+  // 3
+  React.useEffect(() => {
+    if (isAutoFocused && inputRef.current) {
+      // 4
+      inputRef.current.focus();
+    }
+  }, [isAutoFocused]);
+
+  return (
+    <>
+      <label htmlFor={id}>{children}</label>
+      {/* 2 */}
+      <input
+        ref={inputRef}
+        id={id}
+        type={type}
+        value={value}
+        onChange={onInputChange}
+      />
+      <br />
+    </>
+  );
+};
 
 export default App;
