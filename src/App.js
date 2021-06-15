@@ -155,7 +155,7 @@ const Map = (props) => {
         mapStyle={mapstyle}
         onViewportChange={setMapViewportBig}
       >
-        <NavigationControl onViewportChange={setMapViewportBig} />
+        <NavigationControl />
         {props.list.map((marker) => (
           <Marker
             offsetTop={-48}
