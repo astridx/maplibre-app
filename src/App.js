@@ -69,7 +69,12 @@ function App() {
   return (
     <div>
       <h1>{getTitle("React Maplibre Map")}</h1>
-      <LabelInput id="suche" onInputChange={handleSearch} value={searchTerm}>
+      <LabelInput
+        id="suche"
+        onInputChange={handleSearch}
+        value={searchTerm}
+        isAutoFocused
+      >
         <big> Suche: </big>
       </LabelInput>
       <LabelInput id="center" onInputChange={handleCenter} value={centerTerm}>
@@ -155,11 +160,18 @@ const Map = (props) => {
   );
 };
 
-const LabelInput = ({ id, value, onInputChange, type = "text", children }) => (
+const LabelInput = ({
+  id,
+  value,
+  onInputChange,
+  type = "text",
+  isAutoFocused,
+  children,
+}) => (
   <>
     <label htmlFor={id}>{children}</label>
     <input
-      autoFocus
+      autoFocus={isAutoFocused}
       id={id}
       type={type}
       value={value}
