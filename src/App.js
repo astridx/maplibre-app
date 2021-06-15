@@ -70,10 +70,10 @@ function App() {
     <div>
       <h1>{getTitle("React Maplibre Map")}</h1>
       <LabelInput id="suche" onInputChange={handleSearch} value={searchTerm}>
-        Suche:{" "}
+        <big> Suche: </big>
       </LabelInput>
       <LabelInput id="center" onInputChange={handleCenter} value={centerTerm}>
-        Kartenmittelpunkt:{" "}
+        <small>Kartenmittelpunkt: </small>
       </LabelInput>
       <Map list={searchedpois} center={centerTerm} />
       <List list={searchedpois} />
