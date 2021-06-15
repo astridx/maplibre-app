@@ -130,7 +130,17 @@ const Map = (props) => {
     latitude: parseInt(c[0]),
     zoom: 10,
   });
-
+  /*
+  useEffect(() => {
+    setMapViewportBig({
+      height: "50vh",
+      width: "50vw",
+      longitude: parseInt(c[1]),
+      latitude: parseInt(c[0]),
+      zoom: 4,
+    });
+  }, [mapViewportBig]);
+*/
   return (
     <>
       <ReactMapGL
@@ -145,7 +155,7 @@ const Map = (props) => {
         mapStyle={mapstyle}
         onViewportChange={setMapViewportBig}
       >
-        <NavigationControl />
+        <NavigationControl onViewportChange={setMapViewportBig} />
         {props.list.map((marker) => (
           <Marker
             offsetTop={-48}
