@@ -158,7 +158,13 @@ const Map = (props) => {
 const LabelInput = ({ id, value, onInputChange, type = "text", children }) => (
   <>
     <label htmlFor={id}>{children}</label>
-    <input id={id} type={type} value={value} onChange={onInputChange} />
+    <input
+      autoFocus
+      id={id}
+      type={type}
+      value={value}
+      onChange={onInputChange}
+    />
     <br />
   </>
 );
