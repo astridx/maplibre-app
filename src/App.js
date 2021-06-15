@@ -130,17 +130,7 @@ const Map = (props) => {
     latitude: parseInt(c[0]),
     zoom: 10,
   });
-  /*
-  useEffect(() => {
-    setMapViewportBig({
-      height: "50vh",
-      width: "50vw",
-      longitude: parseInt(c[1]),
-      latitude: parseInt(c[0]),
-      zoom: 4,
-    });
-  }, [mapViewportBig]);
-*/
+
   return (
     <>
       <ReactMapGL
