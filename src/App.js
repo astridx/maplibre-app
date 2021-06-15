@@ -69,18 +69,12 @@ function App() {
   return (
     <div>
       <h1>{getTitle("React Maplibre Map")}</h1>
-      <LabelInput
-        id="suche"
-        label="Suche"
-        onInputChange={handleSearch}
-        value={searchTerm}
-      />
-      <LabelInput
-        id="center"
-        label="Kartenmittelpunkt"
-        onInputChange={handleCenter}
-        value={centerTerm}
-      />
+      <LabelInput id="suche" onInputChange={handleSearch} value={searchTerm}>
+        Suche:{" "}
+      </LabelInput>
+      <LabelInput id="center" onInputChange={handleCenter} value={centerTerm}>
+        Kartenmittelpunkt:{" "}
+      </LabelInput>
       <Map list={searchedpois} center={centerTerm} />
       <List list={searchedpois} />
     </div>
@@ -161,9 +155,9 @@ const Map = (props) => {
   );
 };
 
-const LabelInput = ({ id, label, value, onInputChange, type = "text" }) => (
+const LabelInput = ({ id, value, onInputChange, type = "text", children }) => (
   <>
-    <label htmlFor={id}>{label}</label>
+    <label htmlFor={id}>{children}</label>
     <input id={id} type={type} value={value} onChange={onInputChange} />
     <br />
   </>
