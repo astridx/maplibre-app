@@ -69,15 +69,15 @@ function App() {
   return (
     <div>
       <h1>{getTitle("React Maplibre Map")}</h1>
-      <LabelInput
-        id="suche"
-        onInputChange={handleSearch}
-        value={searchTerm}
-        isAutoFocused
-      >
+      <LabelInput id="suche" onInputChange={handleSearch} value={searchTerm}>
         <big> Suche: </big>
       </LabelInput>
-      <LabelInput id="center" onInputChange={handleCenter} value={centerTerm}>
+      <LabelInput
+        id="center"
+        onInputChange={handleCenter}
+        value={centerTerm}
+        isAutoFocused
+      >
         <small>Kartenmittelpunkt: </small>
       </LabelInput>
       <Map list={searchedpois} center={centerTerm} />
