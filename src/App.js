@@ -62,7 +62,8 @@ function App() {
     },
   ];
 
-  const getAsyncPois = () => Promise.resolve({ data: { pois: startPois } });
+  const getAsyncPois = () =>
+    new Promise((resolve) => resolve({ data: { pois: startPois } }));
 
   const [pois, setPois] = React.useState(startPois);
 
