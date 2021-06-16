@@ -113,7 +113,7 @@ const POI = ({ poi, onRemovePoi }) => {
         <img alt="" src={poi.icon} />
       </td>
       <td>
-        <button type="button" onClick={onRemovePoi.bind(null, poi)}>
+        <button type="button" onClick={() => onRemovePoi(poi)}>
           Delete
         </button>
       </td>
