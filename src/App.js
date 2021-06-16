@@ -64,7 +64,7 @@ function App() {
 
   const getAsyncPois = () => Promise.resolve({ data: { pois: startPois } });
 
-  const [pois, setPois] = React.useState(startPois);
+  const [pois, setPois] = React.useState([]);
 
   const handleRemovePoi = (item) => {
     const newPois = pois.filter((poi) => item.place_id !== poi.place_id);
