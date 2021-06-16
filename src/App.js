@@ -108,6 +108,8 @@ function App() {
       </LabelInput>
       <Map list={searchedpois} center={centerTerm} />
 
+      {isError && <p>Etwas ist schief gelaufen ...</p>}
+
       {isLoading ? (
         <p>Ich lade die Daten ...</p>
       ) : (
