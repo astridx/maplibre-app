@@ -97,22 +97,33 @@ const List = (props) => (
   <table>
     <tbody>
       {props.list.map((item) => (
-        <POI key={item.place_id} poi={item} />
+        <POI key={item.place_id} poi={item} onRemovePoi={props.onRemoveItem} />
       ))}
     </tbody>
   </table>
 );
 
-const POI = ({ poi }) => (
-  <tr key={poi.place_id}>
-    <td>{poi.display_name}</td>
-    <td>{poi.lat}</td>
-    <td>{poi.lon}</td>
-    <td>
-      <img alt="" src={poi.icon} />
-    </td>
-  </tr>
-);
+const POI = ({ poi, onRemovePoi }) => {
+  const handleRemovePoi = () => {
+    onRemovePoi(poi);
+  };
+
+  return (
+    <tr key={poi.place_id}>
+      <td>{poi.display_name}</td>
+      <td>{poi.lat}</td>
+      <td>{poi.lon}</td>
+      <td>
+        <img alt="" src={poi.icon} />
+      </td>
+      <td>
+        <button type="button" onClick={handleRemovePoi}>
+          Delete
+        </button>
+      </td>
+    </tr>
+  );
+};
 
 const Map = (props) => {
   const mapstyle =
