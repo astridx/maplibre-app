@@ -31,7 +31,7 @@ function App() {
     setCenterTerm(event.target.value);
   };
 
-  const pois = [
+  const startPois = [
     {
       display_name: "Brot und mehr",
       icon: "https://nominatim.openstreetmap.org/ui/mapicons//shopping_bakery.p.20.png",
@@ -61,6 +61,8 @@ function App() {
       place_id: "4",
     },
   ];
+
+  const [pois, setPois] = React.useState(startPois);
 
   const searchedpois = pois.filter((poi) =>
     poi.display_name.toLowerCase().includes(searchTerm.toLowerCase())
