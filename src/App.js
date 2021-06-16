@@ -168,12 +168,9 @@ const LabelInput = ({
   isAutoFocused,
   children,
 }) => {
-  // 1
   const inputRef = React.useRef();
-  // 3
   React.useEffect(() => {
     if (isAutoFocused && inputRef.current) {
-      // 4
       inputRef.current.focus();
     }
   }, [isAutoFocused]);
@@ -181,7 +178,6 @@ const LabelInput = ({
   return (
     <>
       <label htmlFor={id}>{children}</label>
-      {/* 2 */}
       <input
         ref={inputRef}
         id={id}
