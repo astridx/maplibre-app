@@ -66,6 +66,12 @@ function App() {
 
   const [pois, setPois] = React.useState(startPois);
 
+  useEffect(() => {
+    getAsyncPois().then((result) => {
+      setPois(result.data.pois);
+    });
+  }, []);
+
   const handleRemovePoi = (item) => {
     const newPois = pois.filter((poi) => item.place_id !== poi.place_id);
     setPois(newPois);
