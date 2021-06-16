@@ -64,6 +64,11 @@ function App() {
 
   const [pois, setPois] = React.useState(startPois);
 
+  const handleRemovePoi = (item) => {
+    const newPois = pois.filter((poi) => item.place_id !== poi.place_id);
+    setPois(newPois);
+  };
+
   const searchedpois = pois.filter((poi) =>
     poi.display_name.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -83,7 +88,7 @@ function App() {
         <small>Kartenmittelpunkt: </small>
       </LabelInput>
       <Map list={searchedpois} center={centerTerm} />
-      <List list={searchedpois} />
+      <List list={searchedpois} onRemoveItem={handleRemovePoi} />
     </div>
   );
 }
