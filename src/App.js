@@ -103,7 +103,12 @@ function App() {
         <small>Kartenmittelpunkt: </small>
       </LabelInput>
       <Map list={searchedpois} center={centerTerm} />
-      <List list={searchedpois} onRemoveItem={handleRemovePoi} />
+
+      {isLoading ? (
+        <p>Ich lade die Daten ...</p>
+      ) : (
+        <List list={searchedpois} onRemoveItem={handleRemovePoi} />
+      )}
     </div>
   );
 }
