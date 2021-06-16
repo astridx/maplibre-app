@@ -71,12 +71,16 @@ function App() {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const [isError, setIsError] = useState(false);
+
   useEffect(() => {
     setIsLoading(true);
-    getAsyncPois().then((result) => {
-      setPois(result.data.pois);
-      setIsLoading(false);
-    });
+    getAsyncPois()
+      .then((result) => {
+        setPois(result.data.pois);
+        setIsLoading(false);
+      })
+      .catch(() => setIsError(true));
   }, []);
 
   const handleRemovePoi = (item) => {
