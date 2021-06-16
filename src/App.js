@@ -69,9 +69,13 @@ function App() {
 
   const [pois, setPois] = React.useState([]);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
+    setIsLoading(true);
     getAsyncPois().then((result) => {
       setPois(result.data.pois);
+      setIsLoading(false);
     });
   }, []);
 
