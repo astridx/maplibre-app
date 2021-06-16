@@ -104,10 +104,6 @@ const List = (props) => (
 );
 
 const POI = ({ poi, onRemovePoi }) => {
-  const handleRemovePoi = () => {
-    onRemovePoi(poi);
-  };
-
   return (
     <tr key={poi.place_id}>
       <td>{poi.display_name}</td>
@@ -117,7 +113,7 @@ const POI = ({ poi, onRemovePoi }) => {
         <img alt="" src={poi.icon} />
       </td>
       <td>
-        <button type="button" onClick={handleRemovePoi}>
+        <button type="button" onClick={onRemovePoi.bind(null, poi)}>
           Delete
         </button>
       </td>
