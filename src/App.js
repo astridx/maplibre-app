@@ -17,10 +17,33 @@ const useSemiPersistentState = (key, initialState) => {
 
 const poisReducer = (state, action) => {
   switch (action.type) {
-    case "SET_POIS":
-      return action.payload;
+    case "POIS_FETCH_INIT":
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+    case "POIS_FETCH_SUCCESS":
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        data: action.payload,
+      };
+    case "POIS_FETCH_FAILURE":
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+      };
     case "REMOVE_POIS":
-      return state.filter((poi) => action.payload.place_id !== poi.place_id);
+      return {
+        ...state,
+        data: state.data.filter(
+          (poi) => action.payload.objectID !== poi.objectID
+        ),
+      };
+
     default:
       throw new Error();
   }
@@ -76,23 +99,22 @@ function App() {
   const getAsyncPois = () =>
     new Promise((resolve, reject) => setTimeout(reject, 10000));
 
-  const [pois, dispatchPois] = React.useReducer(poisReducer, []);
-
-  const [isLoading, setIsLoading] = useState(false);
-
-  const [isError, setIsError] = useState(false);
+  const [pois, dispatchPois] = React.useReducer(poisReducer, {
+    data: [],
+    isLoading: false,
+    isError: false,
+  });
 
   useEffect(() => {
-    setIsLoading(true);
+    dispatchPois({ type: "POIS_FETCH_INIT" });
     getAsyncPois()
       .then((result) => {
         dispatchPois({
-          type: "SET_POIS",
+          type: "POIS_FETCH_SUCCESS",
           payload: result.data.pois,
         });
-        setIsLoading(false);
       })
-      .catch(() => setIsError(true));
+      .catch(() => dispatchPois({ type: "POIS_FETCH_FAILURE" }));
   }, []);
 
   const handleRemovePoi = (item) => {
@@ -102,7 +124,7 @@ function App() {
     });
   };
 
-  const searchedpois = pois.filter((poi) =>
+  const searchedpois = pois.data.filter((poi) =>
     poi.display_name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -122,9 +144,9 @@ function App() {
       </LabelInput>
       <Map list={searchedpois} center={centerTerm} />
 
-      {isError && <p>Etwas ist schief gelaufen ...</p>}
+      {pois.isError && <p>Etwas ist schief gelaufen ...</p>}
 
-      {isLoading ? (
+      {pois.isLoading ? (
         <p>Ich lade die Daten ...</p>
       ) : (
         <List list={searchedpois} onRemoveItem={handleRemovePoi} />
