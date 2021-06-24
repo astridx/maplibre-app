@@ -50,7 +50,7 @@ const poisReducer = (state, action) => {
 };
 
 function App() {
-  const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "Brot");
+  const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "");
 
   const [centerTerm, setCenterTerm] = useSemiPersistentState(
     "center",
@@ -65,41 +65,8 @@ function App() {
     setCenterTerm(event.target.value);
   };
 
-  const startPois = [
-    {
-      display_name: "Brot und mehr",
-      icon: "https://nominatim.openstreetmap.org/ui/mapicons//shopping_bakery.p.20.png",
-      lat: "50.4",
-      lon: "6.1",
-      place_id: "1",
-    },
-    {
-      display_name: "Baecker Mueller",
-      icon: "https://nominatim.openstreetmap.org/ui/mapicons//shopping_bakery.p.20.png",
-      lat: "51.4",
-      lon: "6.1",
-      place_id: "2",
-    },
-    {
-      display_name: "Brot am Morgen",
-      icon: "https://nominatim.openstreetmap.org/ui/mapicons//shopping_bakery.p.20.png",
-      lat: "50.4",
-      lon: "7.1",
-      place_id: "3",
-    },
-    {
-      display_name: "Baecker Pleinen",
-      icon: "https://nominatim.openstreetmap.org/ui/mapicons//shopping_bakery.p.20.png",
-      lat: "51.4",
-      lon: "7.1",
-      place_id: "4",
-    },
-  ];
-
-  const getAsyncPois = () =>
-    new Promise((resolve) =>
-      setTimeout(() => resolve({ data: { pois: startPois } }), 10000)
-    );
+  const API_ENDPOINT =
+    "https://nominatim.openstreetmap.org/search?viewbox=7.1,50.1,6.9,49.9&bounded=1&format=json&polygon=0&addressdetails=1&q=[bakery]";
 
   const [pois, dispatchPois] = React.useReducer(poisReducer, {
     data: [],
@@ -109,11 +76,12 @@ function App() {
 
   useEffect(() => {
     dispatchPois({ type: "POIS_FETCH_INIT" });
-    getAsyncPois()
+    fetch(API_ENDPOINT)
+      .then((response) => response.json())
       .then((result) => {
         dispatchPois({
           type: "POIS_FETCH_SUCCESS",
-          payload: result.data.pois,
+          payload: result,
         });
       })
       .catch(() => dispatchPois({ type: "POIS_FETCH_FAILURE" }));
