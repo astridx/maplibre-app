@@ -118,16 +118,16 @@ const Map = (props) => {
   const [mapViewportBig, setMapViewportBig] = useState({
     height: "50vh",
     width: "50vw",
-    longitude: parseInt(c[1]),
-    latitude: parseInt(c[0]),
+    longitude: parseFloat(c[1]),
+    latitude: parseFloat(c[0]),
     zoom: 4,
   });
 
   const [mapViewportSmall, setMapViewportSmall] = useState({
     height: "25vh",
     width: "25vw",
-    longitude: parseInt(c[1]),
-    latitude: parseInt(c[0]),
+    longitude: parseFloat(c[1]),
+    latitude: parseFloat(c[0]),
     zoom: 10,
   });
 
