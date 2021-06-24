@@ -65,8 +65,13 @@ function App() {
     setCenterTerm(event.target.value);
   };
 
-  const API_ENDPOINT =
-    "https://nominatim.openstreetmap.org/search?viewbox=7.1,50.1,6.9,49.9&bounded=1&format=json&polygon=0&addressdetails=1&q=[bakery]";
+  const API_ENDPOINT = `https://nominatim.openstreetmap.org/search?viewbox=${
+    parseFloat(centerTerm.split(",")[1]) + 0.1
+  },${parseFloat(centerTerm.split(",")[0]) + 0.1},${
+    parseFloat(centerTerm.split(",")[1]) - 0.1
+  },${
+    parseFloat(centerTerm.split(",")[0]) - 0.1
+  }&bounded=1&format=json&polygon=0&addressdetails=1&q=[bakery]`;
 
   const [pois, dispatchPois] = React.useReducer(poisReducer, {
     data: [],
