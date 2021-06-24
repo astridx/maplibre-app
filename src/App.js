@@ -74,9 +74,7 @@ function App() {
   ];
 
   const getAsyncPois = () =>
-    new Promise((resolve) =>
-      setTimeout(() => resolve({ data: { pois: startPois } }), 10000)
-    );
+    new Promise((resolve, reject) => setTimeout(reject, 10000));
 
   const [pois, dispatchPois] = React.useReducer(poisReducer, []);
 
