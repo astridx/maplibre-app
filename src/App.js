@@ -98,6 +98,7 @@ const Map = (props) => {
   return (
     <>
       <ReactMapGL
+        key={1}
         {...mapViewportSmall}
         mapStyle={mapstyle}
         onViewportChange={setMapViewportSmall}
@@ -105,6 +106,7 @@ const Map = (props) => {
         <NavigationControl />
       </ReactMapGL>
       <ReactMapGL
+        key={2}
         {...mapViewportBig}
         mapStyle={mapstyle}
         onViewportChange={setMapViewportBig}
@@ -112,10 +114,11 @@ const Map = (props) => {
         <NavigationControl />
         {props.list.map((marker) => (
           <Marker
-            offsetTop={-48}
-            offsetLeft={-24}
-            latitude={parseInt(marker.lat)}
-            longitude={parseInt(marker.lon)}
+            key={marker.place_id}
+            offsetTop={0}
+            offsetLeft={0}
+            latitude={parseFloat(marker.lat)}
+            longitude={parseFloat(marker.lon)}
           >
             <img src={marker.icon} />
           </Marker>
