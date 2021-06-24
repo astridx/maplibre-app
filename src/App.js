@@ -117,14 +117,14 @@ function App() {
       >
         <small>Kartenmittelpunkt: </small>
       </LabelInput>
-      <Map list={searchedpois} center={centerTerm} />
+      <Map list={pois.data} center={centerTerm} />
 
       {pois.isError && <p>Etwas ist schief gelaufen ...</p>}
 
       {pois.isLoading ? (
         <p>Ich lade die Daten ...</p>
       ) : (
-        <List list={searchedpois} onRemoveItem={handleRemovePoi} />
+        <List list={pois.data} onRemoveItem={handleRemovePoi} />
       )}
     </div>
   );
