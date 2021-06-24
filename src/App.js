@@ -88,11 +88,13 @@ const Map = () => {
   return (
     <>
       <ReactMapGL
+        key={1}
         {...mapViewportSmall}
         mapStyle={mapstyle}
         onViewportChange={setMapViewportSmall}
       ></ReactMapGL>
       <ReactMapGL
+        key={2}
         {...mapViewportBig}
         mapStyle={mapstyle}
         onViewportChange={setMapViewportBig}
