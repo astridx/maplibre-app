@@ -78,7 +78,7 @@ function App() {
       setTimeout(() => resolve({ data: { pois: startPois } }), 10000)
     );
 
-  const [pois, setPois] = React.useState([]);
+  const [pois, dispatchPois] = React.useReducer(poisReducer, []);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -88,15 +88,20 @@ function App() {
     setIsLoading(true);
     getAsyncPois()
       .then((result) => {
-        setPois(result.data.pois);
+        dispatchPois({
+          type: "SET_POIS",
+          payload: result.data.pois,
+        });
         setIsLoading(false);
       })
       .catch(() => setIsError(true));
   }, []);
 
   const handleRemovePoi = (item) => {
-    const newPois = pois.filter((poi) => item.place_id !== poi.place_id);
-    setPois(newPois);
+    dispatchPois({
+      type: "REMOVE_POIS",
+      payload: item,
+    });
   };
 
   const searchedpois = pois.filter((poi) =>
