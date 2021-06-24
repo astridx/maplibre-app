@@ -95,6 +95,7 @@ const Map = () => {
   return (
     <>
       <ReactMapGL
+        key={1}
         {...mapViewportSmall}
         mapStyle={mapstyle}
         onViewportChange={setMapViewportSmall}
@@ -102,6 +103,7 @@ const Map = () => {
         <NavigationControl />
       </ReactMapGL>
       <ReactMapGL
+        key={2}
         {...mapViewportBig}
         mapStyle={mapstyle}
         onViewportChange={setMapViewportBig}
