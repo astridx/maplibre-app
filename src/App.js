@@ -40,7 +40,7 @@ const poisReducer = (state, action) => {
       return {
         ...state,
         data: state.data.filter(
-          (poi) => action.payload.objectID !== poi.objectID
+          (poi) => action.payload.place_id !== poi.place_id
         ),
       };
 
