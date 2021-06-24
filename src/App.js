@@ -62,16 +62,20 @@ function App() {
   };
 
   const handleCenter = (event) => {
-    setCenterTerm(event.target.value);
+    if (
+      parseFloat(event.target.value.split(",")[0]) + 0.1 > 90 ||
+      parseFloat(event.target.value.split(",")[0]) - 0.1 < -90 ||
+      parseFloat(event.target.value.split(",")[1]) + 0.1 > 180 ||
+      parseFloat(event.target.value.split(",")[1]) - 0.1 < -180
+    ) {
+      setCenterTerm("50.2, 7.5");
+    } else {
+      setCenterTerm(event.target.value);
+    }
   };
 
-  const API_ENDPOINT = `https://nominatim.openstreetmap.org/search?viewbox=${
-    parseFloat(centerTerm.split(",")[1]) + 0.1
-  },${parseFloat(centerTerm.split(",")[0]) + 0.1},${
-    parseFloat(centerTerm.split(",")[1]) - 0.1
-  },${
-    parseFloat(centerTerm.split(",")[0]) - 0.1
-  }&bounded=1&format=json&polygon=0&addressdetails=1&q=[bakery]`;
+  const API_ENDPOINT =
+    "https://nominatim.openstreetmap.org/search?bounded=1&format=json&polygon=0&addressdetails=1";
 
   const [pois, dispatchPois] = React.useReducer(poisReducer, {
     data: [],
@@ -80,8 +84,22 @@ function App() {
   });
 
   useEffect(() => {
+    if (parseFloat(centerTerm.split(",")[0]) + 0.1 > 90) return;
+    if (parseFloat(centerTerm.split(",")[0]) - 0.1 < -90) return;
+    if (parseFloat(centerTerm.split(",")[1]) + 0.1 > 180) return;
+    if (parseFloat(centerTerm.split(",")[1]) - 0.1 < -180) return;
+
     dispatchPois({ type: "POIS_FETCH_INIT" });
-    fetch(API_ENDPOINT)
+
+    fetch(
+      API_ENDPOINT +
+        `&q=${searchTerm},bakery` +
+        `&viewbox=${parseFloat(centerTerm.split(",")[1]) + 0.1},${
+          parseFloat(centerTerm.split(",")[0]) + 0.1
+        },${parseFloat(centerTerm.split(",")[1]) - 0.1},${
+          parseFloat(centerTerm.split(",")[0]) - 0.1
+        }`
+    )
       .then((response) => response.json())
       .then((result) => {
         dispatchPois({
@@ -90,7 +108,7 @@ function App() {
         });
       })
       .catch(() => dispatchPois({ type: "POIS_FETCH_FAILURE" }));
-  }, []);
+  }, [centerTerm, searchTerm]);
 
   const handleRemovePoi = (item) => {
     dispatchPois({
