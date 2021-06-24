@@ -15,6 +15,17 @@ const useSemiPersistentState = (key, initialState) => {
   return [value, setValue];
 };
 
+const poisReducer = (state, action) => {
+  switch (action.type) {
+    case "SET_POIS":
+      return action.payload;
+    case "REMOVE_POIS":
+      return state.filter((poi) => action.payload.place_id !== poi.place_id);
+    default:
+      throw new Error();
+  }
+};
+
 function App() {
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "Brot");
 
