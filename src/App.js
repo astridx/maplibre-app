@@ -89,11 +89,15 @@ const Map = () => {
 
   return (
     <>
-      <ReactMapGL {...mapViewportSmall} mapStyle={mapstyle}></ReactMapGL>
-      <ReactMapGL {...mapViewportBig} mapStyle={mapstyle}></ReactMapGL>
+      <ReactMapGL
+        key={1}
+        {...mapViewportSmall}
+        mapStyle={mapstyle}
+      ></ReactMapGL>
+      <ReactMapGL key={2} {...mapViewportBig} mapStyle={mapstyle}></ReactMapGL>
     </>
   );
-};
+}
 
 const Search = () => (
   <div>
