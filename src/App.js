@@ -75,7 +75,7 @@ function App() {
   };
 
   const handleSubmit = (event) => {
-    console.log("handleCenterSubmit");
+    console.log("handleSubmit");
   };
 
   const API_ENDPOINT =
@@ -131,7 +131,6 @@ function App() {
       <LabelInput id="suche" onInputChange={handleSearch} value={searchTerm}>
         <big> Suche: </big>
       </LabelInput>
-      <br />
       <LabelInput
         id="center"
         onInputChange={handleCenter}
