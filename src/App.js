@@ -151,7 +151,7 @@ function App() {
         <small>Kartenmittelpunkt: </small>
       </LabelInput>
       <button type="button" disabled={!centerTerm} onClick={handleSubmit}>
-        Aktualisiere die Suche
+        Neue Suche
       </button>
       <Map list={pois.data} center={centerTerm} />
 
