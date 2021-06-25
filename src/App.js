@@ -61,10 +61,6 @@ function App() {
     setSearchTerm(event.target.value);
   };
 
-  const handleSearchSubmit = (event) => {
-    console.log("handleSearchSubmit");
-  };
-
   const handleCenter = (event) => {
     if (
       parseFloat(event.target.value.split(",")[0]) + 0.1 > 90 ||
@@ -78,7 +74,7 @@ function App() {
     }
   };
 
-  const handleCenterSubmit = (event) => {
+  const handleSubmit = (event) => {
     console.log("handleCenterSubmit");
   };
 
@@ -135,9 +131,6 @@ function App() {
       <LabelInput id="suche" onInputChange={handleSearch} value={searchTerm}>
         <big> Suche: </big>
       </LabelInput>
-      <button type="button" disabled={!searchTerm} onClick={handleSearchSubmit}>
-        Ändere die Suche
-      </button>
       <br />
       <LabelInput
         id="center"
@@ -147,8 +140,8 @@ function App() {
       >
         <small>Kartenmittelpunkt: </small>
       </LabelInput>
-      <button type="button" disabled={!searchTerm} onClick={handleCenterSubmit}>
-        Ändere den Kartenmittelpunkt
+      <button type="button" disabled={!centerTerm} onClick={handleSubmit}>
+        Neue Suche
       </button>
       <Map list={pois.data} center={centerTerm} />
 
