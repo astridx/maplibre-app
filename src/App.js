@@ -17,6 +17,8 @@ const useSemiPersistentState = (key, initialState) => {
 };
 
 const poisReducer = (state, action) => {
+  console.log(state);
+  console.log(action);
   switch (action.type) {
     case "POIS_FETCH_INIT":
       return {
@@ -43,6 +45,11 @@ const poisReducer = (state, action) => {
         data: state.data.filter(
           (poi) => action.payload.place_id !== poi.place_id
         ),
+      };
+    case "ADD_POIS":
+      return {
+        ...state,
+        data: state.data.concat(action.payload),
       };
 
     default:
@@ -143,6 +150,14 @@ function App() {
     });
   };
 
+  const handleAddPoi = (item) => {
+    console.log(item);
+    dispatchPois({
+      type: "ADD_POIS",
+      payload: item,
+    });
+  };
+
   return (
     <div>
       <h1>{getTitle("React Maplibre Map")}</h1>
@@ -164,6 +179,7 @@ function App() {
         list={pois.data}
         center={centerTerm}
         onRemoveItem={handleRemovePoi}
+        onAddItem={handleAddPoi}
       />
 
       {pois.isError && <p>Etwas ist schief gelaufen ...</p>}
@@ -269,14 +285,23 @@ const Map = (props) => {
         mapStyle={mapstyle}
         onViewportChange={setMapViewportBig}
         onClick={(x) => {
-          console.log(
+          /*console.log(
             "lat: " +
               x.lngLat[1] +
               ", lon: " +
               x.lngLat[0] +
               ", Timestamp: " +
               x.timeStamp
-          );
+          );*/
+          const tempmarker = {
+            place_id: x.timeStamp,
+            display_name: "Brot " + x.timeStamp,
+            icon: "https://nominatim.openstreetmap.org/ui/mapicons//shopping_bakery.p.20.png",
+            lat: x.lngLat[1],
+            lon: x.lngLat[0],
+          };
+          props.onAddItem(tempmarker);
+          console.log(tempmarker);
         }}
       >
         <NavigationControl />
