@@ -113,7 +113,7 @@ function App() {
     isError: false,
   });
 
-  const handleFetchPois = React.useCallback(() => {
+  const handleFetchPois = React.useCallback(async () => {
     if (parseFloat(centerTerm.split(",")[0]) + 0.1 > 90) return;
     if (parseFloat(centerTerm.split(",")[0]) - 0.1 < -90) return;
     if (parseFloat(centerTerm.split(",")[1]) + 0.1 > 180) return;
@@ -121,16 +121,12 @@ function App() {
 
     dispatchPois({ type: "POIS_FETCH_INIT" });
 
-    axios
-      .get(url)
-      .then((result) => {
-        dispatchPois({
-          type: "POIS_FETCH_SUCCESS",
-          payload: result.data,
-        });
-        //console.log(result.data);
-      })
-      .catch(() => dispatchPois({ type: "POIS_FETCH_FAILURE" }));
+    const result = await axios.get(url);
+
+    dispatchPois({
+      type: "POIS_FETCH_SUCCESS",
+      payload: result.data,
+    });
   }, [url]);
 
   useEffect(() => {
