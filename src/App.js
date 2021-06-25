@@ -268,6 +268,16 @@ const Map = (props) => {
         {...mapViewportBig}
         mapStyle={mapstyle}
         onViewportChange={setMapViewportBig}
+        onClick={(x) => {
+          console.log(
+            "lat: " +
+              x.lngLat[1] +
+              ", lon: " +
+              x.lngLat[0] +
+              ", Timestamp: " +
+              x.timeStamp
+          );
+        }}
       >
         <NavigationControl />
 
