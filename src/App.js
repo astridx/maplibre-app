@@ -75,14 +75,21 @@ function App() {
   };
 
   const handleSubmit = () => {
+    let lat = parseFloat(centerTerm.split(",")[0]);
+    if (!lat || lat > 89.9 || lat < -89.9) {
+      lat = 50.2;
+    }
+
+    let lon = parseFloat(centerTerm.split(",")[1]);
+    if (!lon || lon > 179.9 || lon < -179.9) {
+      lon = 7.5;
+    }
+
+    setCenterTerm(`${lat},${lon}`);
     setUrl(
       API_ENDPOINT +
         `&q=${searchTerm},bakery` +
-        `&viewbox=${parseFloat(centerTerm.split(",")[1]) + 0.1},${
-          parseFloat(centerTerm.split(",")[0]) + 0.1
-        },${parseFloat(centerTerm.split(",")[1]) - 0.1},${
-          parseFloat(centerTerm.split(",")[0]) - 0.1
-        }`
+        `&viewbox=${lon + 0.1},${lat + 0.1},${lon - 0.1},${lat - 0.1}`
     );
   };
 
