@@ -99,10 +99,6 @@ function App() {
     });
   };
 
-  const searchedpois = pois.data.filter((poi) =>
-    poi.display_name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
   return (
     <div>
       <h1>{getTitle("React Maplibre Map")}</h1>
