@@ -61,10 +61,6 @@ function App() {
     setSearchTerm(event.target.value);
   };
 
-  const handleSearchSubmit = (event) => {
-    console.log("handleSearchSubmit");
-  };
-
   const handleCenter = (event) => {
     if (
       parseFloat(event.target.value.split(",")[0]) + 0.1 > 90 ||
@@ -78,12 +74,30 @@ function App() {
     }
   };
 
-  const handleCenterSubmit = (event) => {
-    console.log("handleCenterSubmit");
+  const handleSubmit = () => {
+    setUrl(
+      API_ENDPOINT +
+        `&q=${searchTerm},bakery` +
+        `&viewbox=${parseFloat(centerTerm.split(",")[1]) + 0.1},${
+          parseFloat(centerTerm.split(",")[0]) + 0.1
+        },${parseFloat(centerTerm.split(",")[1]) - 0.1},${
+          parseFloat(centerTerm.split(",")[0]) - 0.1
+        }`
+    );
   };
 
   const API_ENDPOINT =
     "https://nominatim.openstreetmap.org/search?bounded=1&format=json&polygon=0&addressdetails=1";
+
+  const [url, setUrl] = React.useState(
+    API_ENDPOINT +
+      `&q=${searchTerm},bakery` +
+      `&viewbox=${parseFloat(centerTerm.split(",")[1]) + 0.1},${
+        parseFloat(centerTerm.split(",")[0]) + 0.1
+      },${parseFloat(centerTerm.split(",")[1]) - 0.1},${
+        parseFloat(centerTerm.split(",")[0]) - 0.1
+      }`
+  );
 
   const [pois, dispatchPois] = React.useReducer(poisReducer, {
     data: [],
@@ -99,15 +113,7 @@ function App() {
 
     dispatchPois({ type: "POIS_FETCH_INIT" });
 
-    fetch(
-      API_ENDPOINT +
-        `&q=${searchTerm},bakery` +
-        `&viewbox=${parseFloat(centerTerm.split(",")[1]) + 0.1},${
-          parseFloat(centerTerm.split(",")[0]) + 0.1
-        },${parseFloat(centerTerm.split(",")[1]) - 0.1},${
-          parseFloat(centerTerm.split(",")[0]) - 0.1
-        }`
-    )
+    fetch(url)
       .then((response) => response.json())
       .then((result) => {
         dispatchPois({
@@ -135,9 +141,6 @@ function App() {
       <LabelInput id="suche" onInputChange={handleSearch} value={searchTerm}>
         <big> Suche: </big>
       </LabelInput>
-      <button type="button" disabled={!searchTerm} onClick={handleSearchSubmit}>
-        Ändere die Suche
-      </button>
       <br />
       <LabelInput
         id="center"
@@ -147,8 +150,8 @@ function App() {
       >
         <small>Kartenmittelpunkt: </small>
       </LabelInput>
-      <button type="button" disabled={!searchTerm} onClick={handleCenterSubmit}>
-        Ändere den Kartenmittelpunkt
+      <button type="button" disabled={!centerTerm} onClick={handleSubmit}>
+        Aktualisiere die Suche
       </button>
       <Map list={pois.data} center={centerTerm} />
 
