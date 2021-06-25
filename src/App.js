@@ -121,13 +121,14 @@ function App() {
 
     dispatchPois({ type: "POIS_FETCH_INIT" });
 
-    fetch(url)
-      .then((response) => response.json())
+    axios
+      .get(url)
       .then((result) => {
         dispatchPois({
           type: "POIS_FETCH_SUCCESS",
-          payload: result,
+          payload: result.data,
         });
+        //console.log(result.data);
       })
       .catch(() => dispatchPois({ type: "POIS_FETCH_FAILURE" }));
   }, [url]);
