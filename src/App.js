@@ -83,9 +83,7 @@ function App() {
     isError: false,
   });
 
-  // A
   const handleFetchPois = React.useCallback(() => {
-    // B
     if (parseFloat(centerTerm.split(",")[0]) + 0.1 > 90) return;
     if (parseFloat(centerTerm.split(",")[0]) - 0.1 < -90) return;
     if (parseFloat(centerTerm.split(",")[1]) + 0.1 > 180) return;
@@ -110,11 +108,11 @@ function App() {
         });
       })
       .catch(() => dispatchPois({ type: "POIS_FETCH_FAILURE" }));
-  }, [centerTerm, searchTerm]); // E
+  }, [centerTerm, searchTerm]);
 
   useEffect(() => {
-    handleFetchPois(); // C
-  }, [handleFetchPois]); // D
+    handleFetchPois();
+  }, [handleFetchPois]);
 
   const handleRemovePoi = (item) => {
     dispatchPois({
