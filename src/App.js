@@ -141,7 +141,6 @@ function App() {
       <LabelInput id="suche" onInputChange={handleSearch} value={searchTerm}>
         <big> Suche: </big>
       </LabelInput>
-      <br />
       <LabelInput
         id="center"
         onInputChange={handleCenter}
