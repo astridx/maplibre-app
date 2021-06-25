@@ -61,6 +61,10 @@ function App() {
     setSearchTerm(event.target.value);
   };
 
+  const handleSearchSubmit = (event) => {
+    console.log("handleSearchSubmit");
+  };
+
   const handleCenter = (event) => {
     if (
       parseFloat(event.target.value.split(",")[0]) + 0.1 > 90 ||
@@ -72,6 +76,10 @@ function App() {
     } else {
       setCenterTerm(event.target.value);
     }
+  };
+
+  const handleCenterSubmit = (event) => {
+    console.log("handleCenterSubmit");
   };
 
   const API_ENDPOINT =
@@ -127,6 +135,10 @@ function App() {
       <LabelInput id="suche" onInputChange={handleSearch} value={searchTerm}>
         <big> Suche: </big>
       </LabelInput>
+      <button type="button" disabled={!searchTerm} onClick={handleSearchSubmit}>
+        Ändere die Suche
+      </button>
+      <br />
       <LabelInput
         id="center"
         onInputChange={handleCenter}
@@ -135,6 +147,9 @@ function App() {
       >
         <small>Kartenmittelpunkt: </small>
       </LabelInput>
+      <button type="button" disabled={!searchTerm} onClick={handleCenterSubmit}>
+        Ändere den Kartenmittelpunkt
+      </button>
       <Map list={pois.data} center={centerTerm} />
 
       {pois.isError && <p>Etwas ist schief gelaufen ...</p>}
