@@ -160,7 +160,11 @@ function App() {
       <button type="button" disabled={!centerTerm} onClick={handleSubmit}>
         Neue Suche
       </button>
-      <Map list={pois.data} center={centerTerm} />
+      <Map
+        list={pois.data}
+        center={centerTerm}
+        onRemoveItem={handleRemovePoi}
+      />
 
       {pois.isError && <p>Etwas ist schief gelaufen ...</p>}
 
@@ -206,6 +210,26 @@ const POI = ({ poi, onRemovePoi }) => {
   );
 };
 
+const Mapmarker = ({ marker, onRemoveMarker }) => {
+  return (
+    <Marker
+      key={marker.place_id}
+      offsetTop={0}
+      offsetLeft={0}
+      latitude={parseFloat(marker.lat)}
+      longitude={parseFloat(marker.lon)}
+    >
+      <img
+        onContextMenu={(x) => {
+          x.preventDefault();
+          onRemoveMarker(marker);
+        }}
+        src={marker.icon}
+      />
+    </Marker>
+  );
+};
+
 const Map = (props) => {
   const mapstyle =
     "https://api.maptiler.com/maps/streets/style.json?key=" +
@@ -246,16 +270,13 @@ const Map = (props) => {
         onViewportChange={setMapViewportBig}
       >
         <NavigationControl />
-        {props.list.map((marker) => (
-          <Marker
-            key={marker.place_id}
-            offsetTop={0}
-            offsetLeft={0}
-            latitude={parseFloat(marker.lat)}
-            longitude={parseFloat(marker.lon)}
-          >
-            <img src={marker.icon} />
-          </Marker>
+
+        {props.list.map((item) => (
+          <Mapmarker
+            key={item.place_id}
+            marker={item}
+            onRemoveMarker={props.onRemoveItem}
+          />
         ))}
       </ReactMapGL>
     </>
