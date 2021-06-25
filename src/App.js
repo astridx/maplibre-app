@@ -121,12 +121,15 @@ function App() {
 
     dispatchPois({ type: "POIS_FETCH_INIT" });
 
-    const result = await axios.get(url);
-
-    dispatchPois({
-      type: "POIS_FETCH_SUCCESS",
-      payload: result.data,
-    });
+    try {
+      const result = await axios.get(url);
+      dispatchPois({
+        type: "POIS_FETCH_SUCCESS",
+        payload: result.data,
+      });
+    } catch {
+      dispatchPois({ type: "POIS_FETCH_FAILURE" });
+    }
   }, [url]);
 
   useEffect(() => {
