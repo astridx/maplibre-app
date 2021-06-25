@@ -122,7 +122,7 @@ function App() {
         });
       })
       .catch(() => dispatchPois({ type: "POIS_FETCH_FAILURE" }));
-  }, [centerTerm, searchTerm]);
+  }, [url]);
 
   useEffect(() => {
     handleFetchPois();
