@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import ReactMapGL, { Marker, NavigationControl } from "react-map-gl";
 import axios from "axios";
 import { maxBy, minBy } from "lodash";
+import WebMercatorViewport, {
+  Bounds,
+  ViewportProps,
+} from "viewport-mercator-project";
 
 function getTitle(title) {
   return title;
@@ -119,30 +123,6 @@ function App() {
     isError: false,
   });
 
-  const getMinOrMax = (markers, minOrMax, latOrLng) => {
-    if (minOrMax === "max") {
-      return maxBy(markers, latOrLng);
-    } else {
-      return minBy(markers, latOrLng);
-    }
-  };
-
-  const getBounds = (pois) => {
-    const maxLat = getMinOrMax(pois, "max", "lat");
-    const minLat = getMinOrMax(pois, "min", "lat");
-    const maxLng = getMinOrMax(pois, "max", "lon");
-    const minLng = getMinOrMax(pois, "min", "lon");
-
-    if (maxLat && minLat && maxLng && minLng) {
-      const southWest = [minLng.lon, minLat.lat];
-      const northEast = [maxLng.lon, maxLat.lat];
-      return [southWest, northEast];
-    }
-    return "";
-  };
-
-  console.log(getBounds(pois.data));
-
   const handleFetchPois = React.useCallback(async () => {
     if (parseFloat(centerTerm.split(",")[0]) + 0.1 > 90) return;
     if (parseFloat(centerTerm.split(",")[0]) - 0.1 < -90) return;
@@ -174,7 +154,6 @@ function App() {
   };
 
   const handleAddPoi = (item) => {
-    console.log(item);
     dispatchPois({
       type: "ADD_POIS",
       payload: item,
@@ -288,12 +267,52 @@ const Map = (props) => {
   });
 
   const [mapViewportSmall, setMapViewportSmall] = useState({
-    height: "25vh",
-    width: "25vw",
+    height: 200,
+    width: 200,
     longitude: parseFloat(c[1]),
     latitude: parseFloat(c[0]),
-    zoom: 10,
+    zoom: 4,
   });
+
+  const getMinOrMax = (markers, minOrMax, latOrLng) => {
+    if (minOrMax === "max") {
+      return maxBy(markers, latOrLng);
+    } else {
+      return minBy(markers, latOrLng);
+    }
+  };
+
+  const getBounds = (pois) => {
+    const maxLat = getMinOrMax(pois, "max", "lat");
+    const minLat = getMinOrMax(pois, "min", "lat");
+    const maxLng = getMinOrMax(pois, "max", "lon");
+    const minLng = getMinOrMax(pois, "min", "lon");
+
+    if (maxLat && minLat && maxLng && minLng) {
+      const southWest = [parseFloat(minLng.lon), parseFloat(minLat.lat)];
+      const northEast = [parseFloat(maxLng.lon), parseFloat(maxLat.lat)];
+      return [southWest, northEast];
+    }
+    return "";
+  };
+
+  useEffect(() => {
+    if (props.list.length) {
+      const MARKERS_BOUNDS = getBounds(props.list);
+      setMapViewportSmall((mapViewportSmall) => {
+        const nextmapViewportSmall = new WebMercatorViewport({
+          ...mapViewportSmall,
+          height: 200,
+          width: 200,
+        }).fitBounds(MARKERS_BOUNDS);
+
+        return nextmapViewportSmall;
+      });
+    }
+  }, [props.list]);
+
+  const onViewportChange = (nextmapViewportSmall) =>
+    setMapViewportSmall(nextmapViewportSmall);
 
   return (
     <>
