@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactMapGL, { Marker, NavigationControl } from "react-map-gl";
 import axios from "axios";
+import { maxBy, minBy } from "lodash";
 
 function getTitle(title) {
   return title;
@@ -17,8 +18,6 @@ const useSemiPersistentState = (key, initialState) => {
 };
 
 const poisReducer = (state, action) => {
-  console.log(state);
-  console.log(action);
   switch (action.type) {
     case "POIS_FETCH_INIT":
       return {
@@ -119,6 +118,30 @@ function App() {
     isLoading: false,
     isError: false,
   });
+
+  const getMinOrMax = (markers, minOrMax, latOrLng) => {
+    if (minOrMax === "max") {
+      return maxBy(markers, latOrLng);
+    } else {
+      return minBy(markers, latOrLng);
+    }
+  };
+
+  const getBounds = (pois) => {
+    const maxLat = getMinOrMax(pois, "max", "lat");
+    const minLat = getMinOrMax(pois, "min", "lat");
+    const maxLng = getMinOrMax(pois, "max", "lon");
+    const minLng = getMinOrMax(pois, "min", "lon");
+
+    if (maxLat && minLat && maxLng && minLng) {
+      const southWest = [minLng.lon, minLat.lat];
+      const northEast = [maxLng.lon, maxLat.lat];
+      return [southWest, northEast];
+    }
+    return "";
+  };
+
+  console.log(getBounds(pois.data));
 
   const handleFetchPois = React.useCallback(async () => {
     if (parseFloat(centerTerm.split(",")[0]) + 0.1 > 90) return;
@@ -305,7 +328,6 @@ const Map = (props) => {
             lon: x.lngLat[0],
           };
           props.onAddItem(tempmarker);
-          console.log(tempmarker);
         }}
       >
         <NavigationControl />
