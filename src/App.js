@@ -269,9 +269,6 @@ const Mapmarker = ({ marker, onRemoveMarker }) => {
 };
 
 const Map = (props) => {
-  const mapRef = React.useRef(null);
-  const mapContainerRef = React.useRef(null);
-
   const mapstyle =
     "https://api.maptiler.com/maps/streets/style.json?key=" +
     process.env.REACT_APP_MAPTILER_TOKEN;
@@ -296,15 +293,12 @@ const Map = (props) => {
 
   return (
     <>
-      <div ref={mapContainerRef}>
-        <ReactMapGL
-          key={1}
-          ref={mapRef}
-          {...mapViewportSmall}
-          mapStyle={mapstyle}
-          onViewportChange={setMapViewportSmall}
-        ></ReactMapGL>
-      </div>
+      <ReactMapGL
+        key={1}
+        {...mapViewportSmall}
+        mapStyle={mapstyle}
+        onViewportChange={setMapViewportSmall}
+      ></ReactMapGL>
       <ReactMapGL
         key={2}
         {...mapViewportBig}
