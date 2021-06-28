@@ -17,8 +17,6 @@ const useSemiPersistentState = (key, initialState) => {
 };
 
 const poisReducer = (state, action) => {
-  console.log(state);
-  console.log(action);
   switch (action.type) {
     case "POIS_FETCH_INIT":
       return {
@@ -151,7 +149,6 @@ function App() {
   };
 
   const handleAddPoi = (item) => {
-    console.log(item);
     dispatchPois({
       type: "ADD_POIS",
       payload: item,
@@ -289,14 +286,6 @@ const Map = (props) => {
         mapStyle={mapstyle}
         onViewportChange={setMapViewportBig}
         onClick={(x) => {
-          /*console.log(
-            "lat: " +
-              x.lngLat[1] +
-              ", lon: " +
-              x.lngLat[0] +
-              ", Timestamp: " +
-              x.timeStamp
-          );*/
           const tempmarker = {
             place_id: x.timeStamp,
             display_name: "Brot " + x.timeStamp,
@@ -305,7 +294,6 @@ const Map = (props) => {
             lon: x.lngLat[0],
           };
           props.onAddItem(tempmarker);
-          console.log(tempmarker);
         }}
       >
         <NavigationControl />
