@@ -249,8 +249,29 @@ const Mapmarker = ({ marker, onRemoveMarker }) => {
 };
 
 const Map = (props) => {
-  const mapRef = React.useRef(null);
-  const mapContainerRef = React.useRef(null);
+  const getMinOrMax = (markers, minOrMax, latOrLng) => {
+    if (minOrMax === "max") {
+      return maxBy(markers, latOrLng);
+    } else {
+      return minBy(markers, latOrLng);
+    }
+  };
+
+  const getBounds = (pois) => {
+    const maxLat = getMinOrMax(pois, "max", "lat");
+    const minLat = getMinOrMax(pois, "min", "lat");
+    const maxLng = getMinOrMax(pois, "max", "lon");
+    const minLng = getMinOrMax(pois, "min", "lon");
+
+    if (maxLat && minLat && maxLng && minLng) {
+      const southWest = [minLng.lon, minLat.lat];
+      const northEast = [maxLng.lon, maxLat.lat];
+      return [southWest, northEast];
+    }
+    return "";
+  };
+
+  console.log(getBounds(props.list));
 
   const mapstyle =
     "https://api.maptiler.com/maps/streets/style.json?key=" +
@@ -316,15 +337,12 @@ const Map = (props) => {
 
   return (
     <>
-      <div ref={mapContainerRef}>
-        <ReactMapGL
-          key={1}
-          ref={mapRef}
-          {...mapViewportSmall}
-          mapStyle={mapstyle}
-          onViewportChange={setMapViewportSmall}
-        ></ReactMapGL>
-      </div>
+      <ReactMapGL
+        key={1}
+        {...mapViewportSmall}
+        mapStyle={mapstyle}
+        onViewportChange={setMapViewportSmall}
+      ></ReactMapGL>
       <ReactMapGL
         key={2}
         {...mapViewportBig}
