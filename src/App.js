@@ -174,7 +174,6 @@ function App() {
   };
 
   const handleAddPoi = (item) => {
-    console.log(item);
     dispatchPois({
       type: "ADD_POIS",
       payload: item,
@@ -312,14 +311,6 @@ const Map = (props) => {
         mapStyle={mapstyle}
         onViewportChange={setMapViewportBig}
         onClick={(x) => {
-          /*console.log(
-            "lat: " +
-              x.lngLat[1] +
-              ", lon: " +
-              x.lngLat[0] +
-              ", Timestamp: " +
-              x.timeStamp
-          );*/
           const tempmarker = {
             place_id: x.timeStamp,
             display_name: "Brot " + x.timeStamp,
