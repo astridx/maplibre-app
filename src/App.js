@@ -220,8 +220,7 @@ const Mapmarker = ({ marker, onRemoveMarker }) => {
       longitude={parseFloat(marker.lon)}
     >
       <img
-        onContextMenu={(x) => {
-          x.preventDefault();
+        onMouseOver={(x) => {
           onRemoveMarker(marker);
         }}
         src={marker.icon}
