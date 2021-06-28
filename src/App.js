@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import ReactMapGL, { Marker, NavigationControl } from "react-map-gl";
 import axios from "axios";
 import { maxBy, minBy } from "lodash";
-import WebMercatorViewport, {
-  Bounds,
-  ViewportProps,
-} from "viewport-mercator-project";
+import WebMercatorViewport from "viewport-mercator-project";
 
 function getTitle(title) {
   return title;
